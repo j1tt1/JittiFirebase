@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:jittifirebase/screens/register.dart';
+import '../screens/register.dart';
 
 class Authen extends StatefulWidget {
   @override
@@ -8,12 +10,18 @@ class Authen extends StatefulWidget {
 }
 
 class _AuthenState extends State<Authen> {
-  Widget signUpButton() {
-    return RaisedButton(
+  Widget signUpButton(BuildContext context) {
+    return RaisedButton.icon(
+      icon: Icon(Icons.assignment_ind),
+      label: Text('Sign Up'),
       color: Colors.blue[300],
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
-      child: Text('Sign Up'),
-      onPressed: () {},
+      onPressed: () {
+        print('You Click Sign Up');
+        var registerRoute =
+            MaterialPageRoute(builder: (BuildContext context) => Register());
+        Navigator.of(context).push(registerRoute);
+      },
     );
   }
 
@@ -84,7 +92,7 @@ class _AuthenState extends State<Authen> {
               child: passwordTextFormField(),
             ),
             Container(
-              margin: EdgeInsets.only(left: 50.0, right: 50.0, top: 15.0),
+              margin: EdgeInsets.only(left: 20.0, right: 20.0, top: 15.0),
               child: Row(
                 children: <Widget>[
                   Expanded(
@@ -94,7 +102,7 @@ class _AuthenState extends State<Authen> {
                     ),
                   ),
                   Expanded(
-                    child: signUpButton(),
+                    child: signUpButton(context),
                   )
                 ],
               ),
