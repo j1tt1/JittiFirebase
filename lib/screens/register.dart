@@ -11,6 +11,7 @@ class Register extends StatefulWidget {
 class _RegisterState extends State<Register> {
 // Explicit
   final formKey = GlobalKey<FormState>();
+  String nameString, emailString, passwordString;
 
   Widget passwordTextField() {
     return TextFormField(
@@ -26,6 +27,10 @@ class _RegisterState extends State<Register> {
         if (value.length < 6) {
           return 'รหัสผ่านน้อยกว่า 6 ตัวอักษร';
         }
+      },
+      // เก็บค่าตัวแปร passwordString
+      onSaved: (String value) {
+        passwordString = value;
       },
     );
   }
@@ -45,6 +50,10 @@ class _RegisterState extends State<Register> {
         } else if (!((value.contains('@')) && (value.contains('.')))) {
           return 'Email Address ไม่ถูกต้อง!';
         }
+      },
+      // เก็บค่าตัวแปร emailString
+      onSaved: (String value) {
+        emailString = value;
       },
     );
   }
@@ -66,6 +75,10 @@ class _RegisterState extends State<Register> {
           return 'Please Fill Name!';
         }
       },
+      // เก็บค่าตัวแปร nameString
+      onSaved: (String value) {
+        nameString = value;
+      },
     );
   }
 
@@ -75,7 +88,12 @@ class _RegisterState extends State<Register> {
       tooltip: 'Upload To Firebase',
       onPressed: () {
         print('You click upload');
-        if (formKey.currentState.validate()) {}
+        // validate passed
+        if (formKey.currentState.validate()) {
+          formKey.currentState.save(); // เก็บค่าตัวแปรทั้งหมด
+          print(
+              'name = $nameString, email = $emailString, password = $passwordString');
+        }
       },
     );
   }
